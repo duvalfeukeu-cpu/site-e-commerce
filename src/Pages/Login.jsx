@@ -18,7 +18,7 @@ function Login() {
             <input type="password" placeholder="••••••••" />
           </div>
 
-          <button className="btn-login">Connexion</button>
+          <button className="btn-login">sign-up</button>
         </form>
 
         <p className="signup-link">
