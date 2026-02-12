@@ -224,34 +224,64 @@ a { text-decoration: none; color: inherit; }
   transform: translateY(-5px);
   box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
-/* --- LANDING PAGE --- */
+/* --- LANDING PAGE (Version Améliorée) --- */
 .landing-container {
-  /* Image de fond (tu peux changer l'URL) */
   background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
   background-size: cover;
   background-position: center;
-  height: 100vh; /* 100% de la hauteur de l'écran */
+  
+  /* 👇 Force le plein écran (Hauteur de la vue - la barre de navigation) */
+  min-height: 100vh; 
   width: 100%;
+  
+  /* Flexbox pour centrer le contenu */
   display: flex;
-  justify-content: center; /* Centre horizontalement */
-  align-items: center; /* Centre verticalement */
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: white;
+  
+  /* Supprime les marges qui pourraient créer du blanc */
+  margin: 0;
+  padding: 0 20px; /* Un peu d'espace sur les côtés pour pas que le texte touche le bord */
+}
+
+.landing-content {
+  max-width: 800px; /* Empêche le texte de s'étaler trop sur grand écran */
 }
 
 .landing-content h1 {
-  font-size: 4rem;
+  font-size: 4rem; /* Grand sur PC */
   margin-bottom: 20px;
   text-shadow: 2px 2px 4px #000000;
+  line-height: 1.2; /* Espacement des lignes */
   animation: fadeInDown 1s ease;
 }
 
 .landing-content p {
-  font-size: 1.5rem;
+  font-size: 1.5rem; /* Grand sur PC */
   margin-bottom: 40px;
   color: #f0f0f0;
 }
 
+/* --- 📱 VERSION MOBILE (C'est ici que la magie opère) --- */
+@media (max-width: 768px) {
+  .landing-content h1 {
+    font-size: 2.5rem; /* 👇 Beaucoup plus petit sur téléphone */
+  }
+
+  .landing-content p {
+    font-size: 1rem; /* 👇 Plus petit et lisible */
+    margin-bottom: 30px;
+  }
+
+  .btn-enter {
+    padding: 12px 30px; /* Bouton légèrement réduit */
+    font-size: 1rem;
+  }
+}
+
+/* --- BOUTON --- */
 .btn-enter {
   background-color: #febd69;
   color: #131921;
@@ -262,14 +292,14 @@ a { text-decoration: none; color: inherit; }
   text-decoration: none;
   transition: transform 0.3s ease, background-color 0.3s;
   box-shadow: 0 4px 15px rgba(254, 189, 105, 0.4);
+  display: inline-block; /* Important pour que le padding marche bien */
 }
 
 .btn-enter:hover {
-  transform: scale(1.1); /* Grossit au survol */
+  transform: scale(1.1);
   background-color: #f0a04b;
 }
 
-/* Petite animation d'entrée */
 @keyframes fadeInDown {
   from { opacity: 0; transform: translateY(-50px); }
   to { opacity: 1; transform: translateY(0); }
