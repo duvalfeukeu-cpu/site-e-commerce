@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Accueil from './Pages/Accueil';
-import LandingPage from './pages/Landing'; // 👈 1. IMPORT IMPORTANT
+import LandingPage from './pages/LandingPage'; // 👈 1. IMPORT IMPORTANT
 import Details from './Pages/Details';
 import Contact from './Pages/Contact';
 import About from './Pages/About';
