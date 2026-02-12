@@ -280,6 +280,18 @@ a { text-decoration: none; color: inherit; }
     font-size: 1rem;
   }
 }
+@media (max-width:400px){
+  .landing-content h1{
+    font-size: 1.5rem;
+  }
+  .landing-content p{
+    font-size: 1rem;
+  }
+  .btn-enter {
+    padding: 8px 20px; /* Bouton légèrement réduit */
+    font-size: 0.5rem;
+  }  
+}
 
 /* --- BOUTON --- */
 .btn-enter {
