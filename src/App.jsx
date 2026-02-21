@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Accueil from './Pages/Accueil'; // ⚠️ Vérifie si "Pages" ici est aussi en minuscule !
+import Accueil from './pages/Accueil'; // ⚠️ Vérifie si "Pages" ici est aussi en minuscule !
 import LandingPage from './pages/LandingPage'; // ✅ Corrigé en "pages" (minuscule)
-import Details from './Pages/Details';
+import Details from './pages/Details';
 import Contact from './Pages/Contact';
-import About from './Pages/About';
-import Login from './Pages/Login';
+import About from './pages/About';
+import Login from './pages/Login';
 import Dashboard from './pages/Admin/Dashboard'; 
 import { UserProvider } from './context/User'; 
 import './App.css';
