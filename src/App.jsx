@@ -2,13 +2,13 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Accueil from './pages/Accueil'; // ⚠️ Vérifie si "Pages" ici est aussi en minuscule !
-import LandingPage from './pages/LandingPage'; // ✅ Corrigé en "pages" (minuscule)
-import Details from './pages/Details';
-import Contact from './Pages/Contact';
+import Accueil from './pages/Accueil';
+import LandingPage from './pages/LandingPage';
+import Details from './Pages/Details';
+import Contact from './pages/Contact'; // 👈 Tu avais mis "Pages" avec un P majuscule ici
 import About from './pages/About';
 import Login from './pages/Login';
-import Dashboard from './pages/Admin/Dashboard'; 
+import Dashboard from './pages/Admin/Dashboard';
 import { UserProvider } from './context/User'; 
 import './App.css';
 
