@@ -43,10 +43,13 @@ function Navbar({ cartCount }) {
               👤 Connexion
             </Link>
           )}
-          
+          <Link to="/admin" className="text-gray-500 hover:text-yellow-500 text-xs">
+             Accès Administration 🔐
+          </Link>
           <Link to="/panier" className="cart-btn" onClick={() => setMenuOpen(false)}>
             Panier <span className="cart-count">{cartCount}</span>
           </Link>
+          
 
         </div>
       </div>

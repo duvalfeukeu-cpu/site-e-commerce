@@ -1,3 +1,4 @@
+@import "tailwindcss";
 /* --- HERO SECTION (Bannière d'accueil) --- */
 .hero-section {
   background: linear-gradient(135deg, #131921 0%, #37475a 100%); /* Dégradé Amazon sombre */

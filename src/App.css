@@ -69,6 +69,7 @@ a { text-decoration: none; color: inherit; }
   font-size: 0.8rem;
 }
 
+
 .logo { font-size: 1.5rem; font-weight: bold; color: #febd69; }
 .nav-links a { color: white; margin-left: 20px; font-weight: 500; }
 .nav-links a:hover { color: #febd69; }
@@ -80,6 +81,236 @@ a { text-decoration: none; color: inherit; }
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 25px;
   margin-top: 20px;
+}
+/* RESET & VARIABLES */
+:root {
+  --bg-body: #f8fafc;
+  --sidebar-bg: #0f172a;
+  --primary-color: #f59e0b; /* Orange Duval */
+  --text-main: #1e293b;
+  --white: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-body);
+}
+
+/* LAYOUT */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 260px;
+  background-color: var(--sidebar-bg);
+  color: white;
+  position: fixed;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.logo-section {
+  padding: 30px 20px;
+}
+
+.logo-section h1 {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.logo-section span {
+  font-size: 10px;
+  color: #64748b;
+  font-weight: bold;
+}
+
+.nav-menu {
+  padding: 20px 15px;
+  flex: 1;
+}
+
+.nav-item {
+  display: block;
+  padding: 12px 15px;
+  color: #94a3b8;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  transition: 0.3s;
+}
+
+.nav-item:hover {
+  background-color: #1e293b;
+  color: white;
+}
+
+.nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}
+
+/* MAIN CONTENT */
+.main-content {
+  margin-left: 260px; /* Largeur de la sidebar */
+  flex: 1;
+  padding: 40px;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.btn-report {
+  background: white;
+  border: 1px solid #e2e8f0;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 600;
+}
+/* Styles pour le tableau de gestion */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+.admin-table th, .admin-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.admin-table th {
+  background-color: #f1f5f9;
+  font-size: 12px;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.status-pill {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.status-pill.active { background: #dcfce7; color: #15803d; }
+
+.btn-back {
+  background: #334155;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.btn-back:hover { background: #1e293b; }
+/* --- RESPONSIVE DESIGN --- */
+
+@media (max-width: 768px) {
+  /* 1. On empile la Sidebar et le contenu */
+  .admin-container {
+    flex-direction: column;
+  }
+
+  /* 2. La Sidebar devient une barre horizontale en haut */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative; /* Elle ne bloque plus le côté */
+  }
+
+  .logo-section {
+    padding: 15px;
+    text-align: center;
+  }
+
+  .nav-menu {
+    display: flex;
+    overflow-x: auto; /* On peut scroller les boutons horizontalement */
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .nav-item {
+    white-space: nowrap; /* Empêche le texte de revenir à la ligne */
+    padding: 8px 15px;
+    margin-bottom: 0;
+  }
+
+  /* 3. Le contenu prend toute la largeur */
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  /* 4. Les cartes de stats passent sur 1 ou 2 colonnes */
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* 5. On rend le tableau scrollable horizontalement pour ne pas qu'il casse */
+  .admin-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .top-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
+
+/* STATS CARDS */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.card p {
+  font-size: 11px;
+  color: #94a3b8;
+  font-weight: 800;
+  margin: 0;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin: 10px 0 0 0;
+  color: var(--text-main);
+}
+
+.text-danger {
+  color: #ef4444 !important;
 }
 
 /* --- 5. CARTE PRODUIT --- */

@@ -1,26 +1,42 @@
-import { useEffect, useState, useContext } from 'react'; // 👈 Ajout de useContext
+import { useContext } from 'react'; // 👈 Plus besoin de useState ni useEffect !
 import { Link } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import { getProducts } from '../services/Product'; 
-import { UserContext } from '../context/User'; // 👈 Import du contexte
+import { UserContext } from '../context/User'; 
+import { useFetch } from '../hooks/useFetch'; // 👈 1. On importe ton nouveau Hook
 
 function Accueil({ ajouterAuPanier }) {
-  const [produits, setProduits] = useState([]);
-  
-  // 👇 On récupère l'utilisateur connecté depuis la "Radio"
+  // On récupère l'utilisateur pour la bannière
   const { user } = useContext(UserContext);
 
-  useEffect(() => {
-    getProducts().then(data => setProduits(data));
-  }, []);
+  // 👇 2. REMPLACEMENT MAGIQUE : Tout le chargement se fait en 1 ligne !
+  // On appelle l'API et on renomme "data" en "produits"
+  const { data: produits, loading, error } = useFetch('https://fakestoreapi.com/products');
+
+  // 👇 3. On gère l'affichage pendant le chargement (Spinner)
+  if (loading) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '100px' }}>
+        <h2>⏳ Chargement de la boutique...</h2>
+      </div>
+    );
+  }
+
+  // 👇 4. On gère l'affichage si l'API plante (Erreur)
+  if (error) {
+    return (
+      <div style={{ textAlign: 'center', marginTop: '100px', color: 'red' }}>
+        <h2>⚠️ Oups ! Une erreur est survenue :</h2>
+        <p>{error}</p>
+      </div>
+    );
+  }
 
   return (
     <div>
-      
       {/* --- HERO SECTION (Bannière) --- */}
       <div className="hero-section">
         {user ? (
-          // CAS 1 : L'utilisateur est connecté (ex: Duval)
+          // CAS 1 : Utilisateur connecté
           <>
             <h1 className="hero-title">Heureux de vous revoir, {user.name} ! 👋</h1>
             <p className="hero-subtitle">Nous avons de nouvelles offres tech rien que pour vous.</p>
@@ -29,14 +45,13 @@ function Accueil({ ajouterAuPanier }) {
             </div>
           </>
         ) : (
-          // CAS 2 : L'utilisateur n'est pas connecté (Visiteur)
+          // CAS 2 : Visiteur
           <>
             <h1 className="hero-title">Bienvenue chez DUVALSHOP 🚀</h1>
             <p className="hero-subtitle">Le meilleur de la tech, livré chez vous en un clic.</p>
             <div className="hero-buttons">
               <Link to="/login" className="btn-primary">Se connecter</Link>
-              {/* Pour l'instant, S'inscrire mène aussi au Login, on changera ça plus tard */}
-              <Link to="/login" className="btn-secondary">S'inscrire</Link>
+              <Link to="/contact" className="btn-secondary">S'inscrire</Link>
             </div>
           </>
         )}
@@ -48,7 +63,8 @@ function Accueil({ ajouterAuPanier }) {
       </h2>
       
       <div className="product-grid">
-        {produits.map((produit) => (
+        {/* On ajoute un "?" après produits par sécurité (produits?.map) */}
+        {produits?.map((produit) => (
           <ProductCard 
             key={produit.id} 
             produit={produit} 
