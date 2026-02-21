@@ -2,14 +2,17 @@ import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
+// Correction de tous les chemins (bien mettre ./ au début !)
 import Accueil from './pages/Accueil';
 import LandingPage from './pages/LandingPage';
-import Details from './Pages/Details';
-import Contact from './pages/Contact'; // 👈 Tu avais mis "Pages" avec un P majuscule ici
+import Details from './pages/Details';
+import Contact from './pages/Contact'; 
 import About from './pages/About';
 import Login from './pages/Login';
 import Dashboard from './pages/Admin/Dashboard';
-import { UserProvider } from './context/User'; 
+
+import { UserProvider } from './context/User';
 import './App.css';
 
 function App() {
