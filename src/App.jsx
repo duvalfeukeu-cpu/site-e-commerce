@@ -64,6 +64,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/panier" element={<Panier panier={panier} setPanier={setPanier} />} />
+                <Route path="/produit/:id" element={<Details produits={produits} ajouterAuPanier={ajouterAuPanier} />} />
               </Routes>
             </div>
             <Footer />

@@ -95,6 +95,17 @@ const handleAjouter = (e) => {
                     <label>Stock</label>
                     <input required className="admin-input" type="number" value={nouveauProduit.stock} onChange={(e) => setNouveauProduit({...nouveauProduit, stock: e.target.value})} />
                   </div>
+                  {/* Ajoute ceci dans le formulaire de ton Dashboard.jsx */}
+                  <div style={{ gridColumn: 'span 2' }}>
+                    <label>Description du produit</label>
+                    <textarea 
+                        className="admin-input" 
+                        value={nouveauProduit.description} 
+                        onChange={(e) => setNouveauProduit({...nouveauProduit, description: e.target.value})}
+                        placeholder="Décrivez les caractéristiques de l'article..."
+                        style={{ height: '80px', width: '100%' }}
+                      />
+                    </div>                                                  
                   <div>
                     <label>Lien Image (URL direct .jpg ou .png)</label>
                     <input className="admin-input" type="text" value={nouveauProduit.image} onChange={(e) => setNouveauProduit({...nouveauProduit, image: e.target.value})} placeholder="https://image.com/photo.jpg" />

@@ -1,48 +1,69 @@
 import { useParams, useNavigate } from 'react-router-dom';
 
-// 1. On récupère la liste des produits via les Props
-function Details({ produits }) {
-  const { id } = useParams(); // On récupère l'ID qui est dans l'URL
+// 1. On reçoit "produits" ET "ajouterAuPanier" depuis App.jsx
+function Details({ produits, ajouterAuPanier }) {
+  const { id } = useParams();
   const navigate = useNavigate();
 
-  // 2. On cherche le produit correspondant dans notre liste "Source de Vérité"
-  // On utilise Number(id) car l'ID dans l'URL est souvent une chaîne de caractères
+  // On cherche le produit dans notre "Source de Vérité"
   const produit = produits.find((p) => p.id === Number(id) || p.id === id);
 
-  // 3. Si le produit n'est pas trouvé (ex: id inexistant)
   if (!produit) {
     return (
-      <div style={{ textAlign: 'center', marginTop: '50px' }}>
+      <div style={{ textAlign: 'center', marginTop: '100px' }}>
         <h2>⚠️ Produit introuvable</h2>
-        <button onClick={() => navigate('/boutique')} className="btn-primary">
-          Retour à la boutique
-        </button>
+        <button onClick={() => navigate('/boutique')} className="btn-primary">Retour à la boutique</button>
       </div>
     );
   }
 
   return (
-    <div className="details-container" style={{ padding: '40px', display: 'flex', gap: '40px' }}>
-      <div className="details-image">
-        <img src={produit.image} alt={produit.title} style={{ width: '100%', maxWidth: '400px', borderRadius: '8px' }} />
-      </div>
+    <div className="details-container" style={{ padding: '40px', maxWidth: '1000px', margin: '0 auto' }}>
+      
+      {/* 2. BOUTON RETOUR */}
+      <button 
+        onClick={() => navigate(-1)} 
+        style={{ marginBottom: '20px', background: 'none', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '5px', color: '#64748b' }}
+      >
+        ⬅️ Retour aux produits
+      </button>
 
-      <div className="details-info">
-        <h1>{produit.title}</h1>
-        <p className="category" style={{ color: '#64748b', textTransform: 'uppercase' }}>{produit.category}</p>
-        <h2 style={{ color: '#f59e0b' }}>{produit.price.toLocaleString()} FCFA</h2>
-        
-        <div style={{ margin: '20px 0', padding: '15px', background: '#f8fafc', borderRadius: '8px' }}>
-          <p><strong>État du stock :</strong> {produit.stock > 0 ? `${produit.stock} unités disponibles` : 'Rupture de stock'}</p>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '40px' }}>
+        <div className="details-image">
+          <img 
+            src={produit.image} 
+            alt={produit.title} 
+            style={{ width: '100%', borderRadius: '12px', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }} 
+          />
         </div>
 
-        <p className="description">
-          {produit.description || "Aucune description disponible pour ce produit technologique."}
-        </p>
+        <div className="details-info">
+          <span style={{ backgroundColor: '#f1f5f9', padding: '5px 12px', borderRadius: '20px', fontSize: '0.8rem', color: '#475569' }}>
+            {produit.category}
+          </span>
+          
+          <h1 style={{ marginTop: '15px' }}>{produit.title}</h1>
+          <h2 style={{ color: '#f59e0b', margin: '15px 0' }}>{produit.price.toLocaleString()} FCFA</h2>
+          
+          <div style={{ padding: '20px 0', borderTop: '1px solid #e2e8f0' }}>
+            <h4>Description</h4>
+            {/* 3. AFFICHAGE DE LA DESCRIPTION RÉELLE */}
+            <p style={{ color: '#64748b', lineHeight: '1.6' }}>
+              {produit.description || "Aucune description détaillée n'a été ajoutée pour cet article tech."}
+            </p>
+          </div>
 
-        <button className="btn-primary" style={{ marginTop: '20px', padding: '12px 30px' }}>
-          Ajouter au panier
-        </button>
+          <p><strong>Stock :</strong> {produit.stock} unités restantes</p>
+
+          {/* 4. BOUTON PANIER CONNECTÉ */}
+          <button 
+            onClick={() => ajouterAuPanier(produit)}
+            className="btn-primary" 
+            style={{ width: '100%', marginTop: '20px', padding: '15px', borderRadius: '8px' }}
+          >
+            Ajouter au panier 🛒
+          </button>
+        </div>
       </div>
     </div>
   );
